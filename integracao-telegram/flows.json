@@ -1,0 +1,162 @@
+[
+    {
+        "id": "3a64c6b7f9d815f3",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "314be77acf5a9403",
+        "type": "watson-assistant-v2",
+        "z": "3a64c6b7f9d815f3",
+        "name": "Atendimento Startup",
+        "service-endpoint": "https://api.au-syd.assistant.watson.cloud.ibm.com/instances/5de54a9d-d112-44b9-a087-3a4adc90a431",
+        "assistant_id": "0d706a96-4fd3-4761-a876-0e2c0714c0d2",
+        "debug": false,
+        "restart": false,
+        "return_context": true,
+        "alternate_intents": false,
+        "multisession": true,
+        "timeout": "",
+        "optout-learning": false,
+        "persist-session-id": false,
+        "x": 500,
+        "y": 360,
+        "wires": [
+            [
+                "a0ad32f62187df60",
+                "632ba6439b2a714a"
+            ]
+        ]
+    },
+    {
+        "id": "a0ad32f62187df60",
+        "type": "debug",
+        "z": "3a64c6b7f9d815f3",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 700,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "7ceb3c1e55a60554",
+        "type": "telegram receiver",
+        "z": "3a64c6b7f9d815f3",
+        "name": "",
+        "bot": "17eec6c1a15359c5",
+        "saveDataDir": "",
+        "filterCommands": false,
+        "x": 110,
+        "y": 400,
+        "wires": [
+            [
+                "9a416ff2644cd775"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "3c8af857fadb56f9",
+        "type": "telegram sender",
+        "z": "3a64c6b7f9d815f3",
+        "name": "",
+        "bot": "17eec6c1a15359c5",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 910,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "32e91ffa6b949552",
+        "type": "debug",
+        "z": "3a64c6b7f9d815f3",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 560,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "9a416ff2644cd775",
+        "type": "function",
+        "z": "3a64c6b7f9d815f3",
+        "name": "function 1",
+        "func": "msg.params = {\n    \"session_id\": msg.payload.chatId,\n}\nmsg.chatId = msg.payload.chatId;\nmsg.payload = msg.payload.content;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 360,
+        "wires": [
+            [
+                "314be77acf5a9403"
+            ]
+        ]
+    },
+    {
+        "id": "632ba6439b2a714a",
+        "type": "function",
+        "z": "3a64c6b7f9d815f3",
+        "name": "function 2",
+        "func": "msg.payload = {\n    chatId: msg.chatId,\n    type: \"message\",\n    content: msg.payload.output.generic[0].text\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 400,
+        "wires": [
+            [
+                "3c8af857fadb56f9"
+            ]
+        ]
+    },
+    {
+        "id": "17eec6c1a15359c5",
+        "type": "telegram bot",
+        "botname": "Jarves",
+        "usernames": "",
+        "chatids": "",
+        "baseapiurl": "",
+        "updatemode": "polling",
+        "pollinterval": "300",
+        "usesocks": false,
+        "sockshost": "",
+        "socksprotocol": "socks5",
+        "socksport": "6667",
+        "socksusername": "anonymous",
+        "sockspassword": "",
+        "bothost": "",
+        "botpath": "",
+        "localbotport": "8443",
+        "publicbotport": "8443",
+        "privatekey": "",
+        "certificate": "",
+        "useselfsignedcertificate": false,
+        "sslterminated": false,
+        "verboselogging": false
+    }
+]
