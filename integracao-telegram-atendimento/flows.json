@@ -1,138 +1,19 @@
 [
     {
-        "id": "3a64c6b7f9d815f3",
+        "id": "b3719c686e982faa",
         "type": "tab",
-        "label": "Flow 1",
+        "label": "TTS STT",
         "disabled": false,
         "info": "",
         "env": []
     },
     {
-        "id": "314be77acf5a9403",
-        "type": "watson-assistant-v2",
-        "z": "3a64c6b7f9d815f3",
-        "name": "Atendimento Startup",
-        "service-endpoint": "https://api.au-syd.assistant.watson.cloud.ibm.com/instances/5de54a9d-d112-44b9-a087-3a4adc90a431",
-        "assistant_id": "0d706a96-4fd3-4761-a876-0e2c0714c0d2",
-        "debug": false,
-        "restart": false,
-        "return_context": true,
-        "alternate_intents": false,
-        "multisession": true,
-        "timeout": "",
-        "optout-learning": false,
-        "persist-session-id": false,
-        "x": 500,
-        "y": 360,
-        "wires": [
-            [
-                "a0ad32f62187df60",
-                "632ba6439b2a714a"
-            ]
-        ]
-    },
-    {
-        "id": "a0ad32f62187df60",
-        "type": "debug",
-        "z": "3a64c6b7f9d815f3",
-        "name": "debug 1",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 700,
-        "y": 320,
-        "wires": []
-    },
-    {
-        "id": "7ceb3c1e55a60554",
-        "type": "telegram receiver",
-        "z": "3a64c6b7f9d815f3",
-        "name": "",
-        "bot": "17eec6c1a15359c5",
-        "saveDataDir": "",
-        "filterCommands": false,
-        "x": 110,
-        "y": 400,
-        "wires": [
-            [
-                "9a416ff2644cd775"
-            ],
-            []
-        ]
-    },
-    {
-        "id": "3c8af857fadb56f9",
-        "type": "telegram sender",
-        "z": "3a64c6b7f9d815f3",
-        "name": "",
-        "bot": "17eec6c1a15359c5",
-        "haserroroutput": false,
-        "outputs": 1,
-        "x": 910,
-        "y": 360,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "32e91ffa6b949552",
-        "type": "debug",
-        "z": "3a64c6b7f9d815f3",
-        "name": "debug 2",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 560,
-        "y": 100,
-        "wires": []
-    },
-    {
-        "id": "9a416ff2644cd775",
-        "type": "function",
-        "z": "3a64c6b7f9d815f3",
-        "name": "function 1",
-        "func": "msg.params = {\n    \"session_id\": msg.payload.chatId,\n}\nmsg.chatId = msg.payload.chatId;\nmsg.payload = msg.payload.content;\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 300,
-        "y": 360,
-        "wires": [
-            [
-                "314be77acf5a9403"
-            ]
-        ]
-    },
-    {
-        "id": "632ba6439b2a714a",
-        "type": "function",
-        "z": "3a64c6b7f9d815f3",
-        "name": "function 2",
-        "func": "msg.payload = {\n    chatId: msg.chatId,\n    type: \"message\",\n    content: msg.payload.output.generic[0].text\n}\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 700,
-        "y": 400,
-        "wires": [
-            [
-                "3c8af857fadb56f9"
-            ]
-        ]
+        "id": "96874b6506eb9736",
+        "type": "tab",
+        "label": "Base do atendimento",
+        "disabled": false,
+        "info": "",
+        "env": []
     },
     {
         "id": "17eec6c1a15359c5",
@@ -158,5 +39,600 @@
         "useselfsignedcertificate": false,
         "sslterminated": false,
         "verboselogging": false
+    },
+    {
+        "id": "5b75079dbf220d69",
+        "type": "telegram bot",
+        "botname": "DayScapebot",
+        "usernames": "",
+        "chatids": "",
+        "baseapiurl": "",
+        "updatemode": "polling",
+        "pollinterval": "300",
+        "usesocks": false,
+        "sockshost": "",
+        "socksprotocol": "socks5",
+        "socksport": "6667",
+        "socksusername": "anonymous",
+        "sockspassword": "",
+        "bothost": "",
+        "botpath": "",
+        "localbotport": "8443",
+        "publicbotport": "8443",
+        "privatekey": "",
+        "certificate": "",
+        "useselfsignedcertificate": false,
+        "sslterminated": false,
+        "verboselogging": false
+    },
+    {
+        "id": "777a2a463ff5e535",
+        "type": "telegram receiver",
+        "z": "b3719c686e982faa",
+        "name": "",
+        "bot": "17eec6c1a15359c5",
+        "saveDataDir": "",
+        "filterCommands": false,
+        "x": 190,
+        "y": 180,
+        "wires": [
+            [
+                "f51f06e4c1722c07",
+                "de8771194db28417"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "f51f06e4c1722c07",
+        "type": "debug",
+        "z": "b3719c686e982faa",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 500,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "f99aeb9dee391020",
+        "type": "watson-speech-to-text",
+        "z": "b3719c686e982faa",
+        "name": "Watson STT",
+        "alternatives": 1,
+        "speakerlabels": true,
+        "smartformatting": false,
+        "lang": "pt-BR",
+        "langhidden": "pt-BR",
+        "langcustom": "NoCustomisationSetting",
+        "langcustomhidden": "",
+        "custom-weight": "0.5",
+        "band": "BroadbandModel",
+        "bandhidden": "",
+        "keywords": "",
+        "keywords-threshold": "0.5",
+        "word-confidence": false,
+        "password": "",
+        "apikey": "ynsWEnhRJw85BtP9n5qf-dzy77RdAhsoovQHBC8wjeQR",
+        "payload-response": true,
+        "streaming-mode": false,
+        "streaming-mute": true,
+        "auto-connect": false,
+        "discard-listening": false,
+        "disable-precheck": false,
+        "service-endpoint": "https://api.au-syd.speech-to-text.watson.cloud.ibm.com/instances/0cf9088a-2ed4-4a25-83c0-2081989018b4",
+        "x": 610,
+        "y": 300,
+        "wires": [
+            [
+                "574569840999c9d9"
+            ]
+        ]
+    },
+    {
+        "id": "de8771194db28417",
+        "type": "function",
+        "z": "b3719c686e982faa",
+        "name": "function 3",
+        "func": "msg.payload = msg.payload.weblink;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 260,
+        "wires": [
+            [
+                "f99aeb9dee391020"
+            ]
+        ]
+    },
+    {
+        "id": "574569840999c9d9",
+        "type": "debug",
+        "z": "b3719c686e982faa",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 760,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "ffdf20c91535c274",
+        "type": "inject",
+        "z": "b3719c686e982faa",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "Oiiiiiiiiiiiiiiiiii, Como você ta mariazinha?",
+        "payloadType": "str",
+        "x": 410,
+        "y": 460,
+        "wires": [
+            [
+                "20155fe486f83008"
+            ]
+        ]
+    },
+    {
+        "id": "20155fe486f83008",
+        "type": "watson-text-to-speech",
+        "z": "b3719c686e982faa",
+        "name": "Watsonn TTS",
+        "lang": "pt-BR",
+        "langhidden": "pt-BR",
+        "langcustom": "NoCustomisationSetting",
+        "langcustomhidden": "",
+        "voice": "pt-BR_IsabelaVoice",
+        "voicehidden": "",
+        "format": "audio/wav",
+        "password": "",
+        "apikey": "qx4hcfyYMKUwUjBCjMFy0XSkiRlggBucQsFQj8okkBNm",
+        "payload-response": true,
+        "service-endpoint": "https://api.au-syd.text-to-speech.watson.cloud.ibm.com/instances/a52fb0f0-7609-42b3-bf02-0471d5049929",
+        "x": 640,
+        "y": 500,
+        "wires": [
+            [
+                "7811db27bed0961b",
+                "ea4bf9f39e3b1891"
+            ]
+        ]
+    },
+    {
+        "id": "7811db27bed0961b",
+        "type": "function",
+        "z": "b3719c686e982faa",
+        "name": "function 4",
+        "func": "msg.payload = {\n    chatId: 6682813067,\n    type: \"voice\",\n    content: msg.payload\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 820,
+        "y": 560,
+        "wires": [
+            [
+                "0875b383fe26a28c",
+                "64cdd854975c717d"
+            ]
+        ]
+    },
+    {
+        "id": "0875b383fe26a28c",
+        "type": "telegram sender",
+        "z": "b3719c686e982faa",
+        "name": "",
+        "bot": "17eec6c1a15359c5",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 970,
+        "y": 700,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ea4bf9f39e3b1891",
+        "type": "debug",
+        "z": "b3719c686e982faa",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 900,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "64cdd854975c717d",
+        "type": "debug",
+        "z": "b3719c686e982faa",
+        "name": "debug 5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1060,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "0919a7734aa98c0f",
+        "type": "watson-assistant-v2",
+        "z": "96874b6506eb9736",
+        "name": "Atendimento Startup",
+        "service-endpoint": "https://api.au-syd.assistant.watson.cloud.ibm.com/instances/5de54a9d-d112-44b9-a087-3a4adc90a431",
+        "assistant_id": "0d706a96-4fd3-4761-a876-0e2c0714c0d2",
+        "debug": false,
+        "restart": false,
+        "return_context": true,
+        "alternate_intents": false,
+        "multisession": true,
+        "timeout": "",
+        "optout-learning": false,
+        "persist-session-id": false,
+        "x": 960,
+        "y": 360,
+        "wires": [
+            [
+                "2a80fdb4b816618f",
+                "4cf07405d36f07a6"
+            ]
+        ]
+    },
+    {
+        "id": "2a80fdb4b816618f",
+        "type": "debug",
+        "z": "96874b6506eb9736",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1180,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "77d8323ef34035e1",
+        "type": "telegram receiver",
+        "z": "96874b6506eb9736",
+        "name": "",
+        "bot": "17eec6c1a15359c5",
+        "saveDataDir": "",
+        "filterCommands": false,
+        "x": 90,
+        "y": 280,
+        "wires": [
+            [
+                "b0249d20a9bd4062",
+                "b4c40f11eb48ada3"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "be4aa9d982d87280",
+        "type": "telegram sender",
+        "z": "96874b6506eb9736",
+        "name": "",
+        "bot": "17eec6c1a15359c5",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 2070,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b0249d20a9bd4062",
+        "type": "function",
+        "z": "96874b6506eb9736",
+        "name": "Entrada do Telegram",
+        "func": "msg.params = {\n    \"session_id\": msg.payload.chatId\n}\nmsg.type = msg.payload.type;\nmsg.chatId = msg.payload.chatId;\n\n\nif(msg.type == \"message\"){\n    msg.payload = msg.payload.content;\n}else if (msg.type == \"voice\"){\n    msg.payload = msg.payload.weblink;\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 360,
+        "wires": [
+            [
+                "e549fa3cd9edf9cd",
+                "a7bdfe77c530195b"
+            ]
+        ]
+    },
+    {
+        "id": "3d856343cb69b387",
+        "type": "function",
+        "z": "96874b6506eb9736",
+        "name": "Prepara Saída Texto Telegram",
+        "func": "msg.payload = {\n    chatId: msg.chatId,\n    type: \"message\",\n    content: msg.payload.output.generic[0].text\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1350,
+        "y": 420,
+        "wires": [
+            [
+                "be4aa9d982d87280"
+            ]
+        ]
+    },
+    {
+        "id": "e549fa3cd9edf9cd",
+        "type": "switch",
+        "z": "96874b6506eb9736",
+        "name": "",
+        "property": "type",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "message",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "voice",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 530,
+        "y": 380,
+        "wires": [
+            [
+                "0919a7734aa98c0f"
+            ],
+            [
+                "3832335109cd1c1b"
+            ]
+        ]
+    },
+    {
+        "id": "b4c40f11eb48ada3",
+        "type": "debug",
+        "z": "96874b6506eb9736",
+        "name": "debug 6",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 300,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "a7bdfe77c530195b",
+        "type": "debug",
+        "z": "96874b6506eb9736",
+        "name": "debug 7",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 540,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "3832335109cd1c1b",
+        "type": "watson-speech-to-text",
+        "z": "96874b6506eb9736",
+        "name": "Watson-Jarves-STT",
+        "alternatives": 1,
+        "speakerlabels": true,
+        "smartformatting": false,
+        "lang": "pt-BR",
+        "langhidden": "pt-BR",
+        "langcustom": "NoCustomisationSetting",
+        "langcustomhidden": "",
+        "custom-weight": "0.5",
+        "band": "BroadbandModel",
+        "bandhidden": "",
+        "keywords": "",
+        "keywords-threshold": "0.5",
+        "word-confidence": false,
+        "password": "",
+        "apikey": "ynsWEnhRJw85BtP9n5qf-dzy77RdAhsoovQHBC8wjeQR",
+        "payload-response": true,
+        "streaming-mode": false,
+        "streaming-mute": true,
+        "auto-connect": false,
+        "discard-listening": false,
+        "disable-precheck": false,
+        "service-endpoint": "https://api.au-syd.speech-to-text.watson.cloud.ibm.com/instances/0cf9088a-2ed4-4a25-83c0-2081989018b4",
+        "x": 740,
+        "y": 460,
+        "wires": [
+            [
+                "0919a7734aa98c0f"
+            ]
+        ]
+    },
+    {
+        "id": "6665f6f32afe7782",
+        "type": "watson-text-to-speech",
+        "z": "96874b6506eb9736",
+        "name": "Watson-Jarves-TTS",
+        "lang": "pt-BR",
+        "langhidden": "pt-BR",
+        "langcustom": "NoCustomisationSetting",
+        "langcustomhidden": "",
+        "voice": "pt-BR_IsabelaV3Voice",
+        "voicehidden": "pt-BR_IsabelaV3Voice",
+        "format": "audio/wav",
+        "password": "",
+        "apikey": "qx4hcfyYMKUwUjBCjMFy0XSkiRlggBucQsFQj8okkBNm",
+        "payload-response": true,
+        "service-endpoint": "https://api.au-syd.text-to-speech.watson.cloud.ibm.com/instances/a52fb0f0-7609-42b3-bf02-0471d5049929",
+        "x": 1580,
+        "y": 540,
+        "wires": [
+            [
+                "053cd2298535e095",
+                "5a058d5b7f4c142b"
+            ]
+        ]
+    },
+    {
+        "id": "4cf07405d36f07a6",
+        "type": "switch",
+        "z": "96874b6506eb9736",
+        "name": "",
+        "property": "type",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "message",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "voice",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1150,
+        "y": 480,
+        "wires": [
+            [
+                "3d856343cb69b387"
+            ],
+            [
+                "830e2d470708b714",
+                "9a0c1ba5ba6af260"
+            ]
+        ]
+    },
+    {
+        "id": "830e2d470708b714",
+        "type": "function",
+        "z": "96874b6506eb9736",
+        "name": "Prepara Trancrição",
+        "func": "msg.payload = msg.payload.output.generic[0].text;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1370,
+        "y": 500,
+        "wires": [
+            [
+                "6665f6f32afe7782"
+            ]
+        ]
+    },
+    {
+        "id": "053cd2298535e095",
+        "type": "debug",
+        "z": "96874b6506eb9736",
+        "name": "debug 8",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1840,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "5a058d5b7f4c142b",
+        "type": "function",
+        "z": "96874b6506eb9736",
+        "name": "Saída Audio Telegram",
+        "func": "msg.payload = {\n    chatId: msg.chatId,\n    type: \"voice\",\n    content: msg.payload\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1820,
+        "y": 480,
+        "wires": [
+            [
+                "be4aa9d982d87280"
+            ]
+        ]
+    },
+    {
+        "id": "9a0c1ba5ba6af260",
+        "type": "debug",
+        "z": "96874b6506eb9736",
+        "name": "debug 9",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1320,
+        "y": 600,
+        "wires": []
     }
 ]
