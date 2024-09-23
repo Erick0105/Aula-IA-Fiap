@@ -1,0 +1,1059 @@
+{
+  "intents": [
+    {
+      "intent": "horario_funcionamento",
+      "examples": [
+        {
+          "text": "A partir de que horas estão atendendo?"
+        },
+        {
+          "text": "Podem me falar qual seria o horario de funcionamento por favor"
+        },
+        {
+          "text": "Qual o horário de funcionamento?"
+        },
+        {
+          "text": "Quando que funciona?"
+        },
+        {
+          "text": "Vocês atendem final de semana?"
+        }
+      ],
+      "description": "Diálogo que reconhece o pedido de horário de funcionamento."
+    },
+    {
+      "intent": "sugestao_prato",
+      "examples": [
+        {
+          "text": "Estou em dúvida sobre o que pedir. Você poderia me sugerir um prato para mim?"
+        },
+        {
+          "text": "Estou interessado em experimentar algo novo. Qual prato você recomendaria?"
+        },
+        {
+          "text": "Gostaria de uma sugestão de prato para minha experiência."
+        },
+        {
+          "text": "Quais são os tipos de prato que você me sugere?"
+        },
+        {
+          "text": "Você poderia me indicar um prato que seja ideal a minha experiência?"
+        }
+      ],
+      "description": "Intenção criada para o auxilio na harmonização de pratos"
+    },
+    {
+      "intent": "valor_experiencia",
+      "examples": [
+        {
+          "text": "Me fale qual é o valor de experiência por favor"
+        },
+        {
+          "text": "Pode me passar o valor de uma experiência?"
+        },
+        {
+          "text": "Quais seriam os valores de experiência?"
+        },
+        {
+          "text": "Qual o valor?"
+        },
+        {
+          "text": "Qual o valor da experiência?"
+        },
+        {
+          "text": "Quero saber o valor"
+        },
+        {
+          "text": "Quero saber qual é o valor"
+        },
+        {
+          "text": "Vocês podem me falar os valores das experiências por pessoas?"
+        }
+      ],
+      "description": "Essa intenção reconhece a inteção do cliente de pedido de valores da experiência."
+    }
+  ],
+  "entities": [
+    {
+      "entity": "dia_semana",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Domingo",
+          "synonyms": [
+            "Domingão",
+            "Domingou"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "Quarta",
+          "synonyms": [
+            "Quarta-feira"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "Quinta",
+          "synonyms": [
+            "Quinta-Feira"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "Sábado",
+          "synonyms": [
+            "sabado"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "Segunda",
+          "synonyms": [
+            "Segunda-Feira",
+            "Segundou"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "Sexta",
+          "synonyms": [
+            "Sexta-Feira",
+            "Sextou"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "Terça",
+          "synonyms": [
+            "Terça-Feira"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "tipo_bebida",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Alcoólica",
+          "synonyms": [
+            "alcoól",
+            "alcoólicas",
+            "alcoólico",
+            "alcoólicos",
+            "bebida alcolizada",
+            "bebida de teor alcoólico",
+            "Bebida fermentada",
+            "Bebida forte",
+            "Licor",
+            "vinho ou cerveja"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "suco",
+          "synonyms": [
+            "bebida de fruta",
+            "limonada",
+            "refresco",
+            "sucos"
+          ]
+        }
+      ]
+    },
+    {
+      "entity": "tipos_pratos",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Carnes Vermelhas",
+          "synonyms": [
+            "carne",
+            "carnes",
+            "carnes bovinas",
+            "carnes de animais terrestres",
+            "Carnes de caça",
+            "carnes de gado",
+            "carnes de porco"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "Peixes",
+          "synonyms": [
+            "carne de origem do mar ou lago",
+            "carne marítima",
+            "Espécies aquáticas",
+            "peixe",
+            "Pescados"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "Vegana",
+          "synonyms": [
+            "Opção Vegana",
+            "Sem ingrediente de animais",
+            "Sem origem animal",
+            "Vegano"
+          ]
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    }
+  },
+  "dialog_nodes": [
+    {
+      "type": "standard",
+      "title": "Boas vindas.",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Olá. sou o DayScapeBot seu auxiliar hoje, Como posso te ajudar?"
+              },
+              {
+                "text": "Bem-vindo ao DayScapeBot, seu assistente pessoal para uma experiência \nperfeita! Como posso lhe ajudar?"
+              },
+              {
+                "text": "Eae sou o DayScapeBot, irei lhe auxiliar na sua experiência! O que deseja?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "random"
+          }
+        ]
+      },
+      "conditions": "welcome",
+      "dialog_node": "Bem-vindo"
+    },
+    {
+      "type": "standard",
+      "title": "Em outros casos",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Eu não entendi. Você pode tentar reformular a frase."
+              },
+              {
+                "text": "Você pode reformular sua afirmação? Eu não estou entendendo."
+              },
+              {
+                "text": "Eu não entendi o sentido."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "anything_else",
+      "dialog_node": "Em outros casos",
+      "previous_sibling": "node_2_1715393763948",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_11_1715397100993",
+      "context": {
+        "tipo_bebida": "@tipo_bebida"
+      },
+      "conditions": "@tipo_bebida",
+      "event_name": "input",
+      "dialog_node": "handler_12_1715397100993"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Qual tipo de bebida você prefere? Possuímos bebidas tanto Alcoólicas quanto sucos."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "slot_11_1715397100993",
+      "event_name": "focus",
+      "dialog_node": "handler_13_1715397100993",
+      "previous_sibling": "handler_12_1715397100993"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_14_1715397100993",
+      "context": {
+        "tipos_pratos": "@tipos_pratos"
+      },
+      "conditions": "@tipos_pratos",
+      "event_name": "input",
+      "dialog_node": "handler_15_1715397100993"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": ""
+              }
+            ],
+            "response_type": "text"
+          }
+        ]
+      },
+      "parent": "slot_14_1715397100993",
+      "event_name": "focus",
+      "dialog_node": "handler_16_1715397100993",
+      "previous_sibling": "handler_15_1715397100993"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_10_1715396157838",
+      "context": {
+        "tipo_bebida": "@tipo_bebida"
+      },
+      "conditions": "@tipo_bebida",
+      "event_name": "input",
+      "dialog_node": "handler_2_1715396157860"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": ""
+              }
+            ],
+            "response_type": "text"
+          }
+        ]
+      },
+      "parent": "slot_8_1715396181322",
+      "event_name": "focus",
+      "dialog_node": "handler_3_1715396181323",
+      "previous_sibling": "handler_5_1715396181323"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_2_1715397097419",
+      "context": {
+        "tipo_bebida": "@tipo_bebida"
+      },
+      "conditions": "@tipo_bebida",
+      "event_name": "input",
+      "dialog_node": "handler_3_1715397097419"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Qual tipo de bebida você prefere? Possuímos bebidas tanto Alcoólicas quanto sucos."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "slot_2_1715397097419",
+      "event_name": "focus",
+      "dialog_node": "handler_4_1715397097419",
+      "previous_sibling": "handler_3_1715397097419"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Qual tipo de bebida você prefere? Possuímos bebidas tanto Alcoólicas quanto sucos."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "slot_10_1715396157838",
+      "event_name": "focus",
+      "dialog_node": "handler_5_1715396157860",
+      "previous_sibling": "handler_2_1715396157860"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_8_1715396181322",
+      "context": {
+        "tipos_pratos": "@tipos_pratos"
+      },
+      "conditions": "@tipos_pratos",
+      "event_name": "input",
+      "dialog_node": "handler_5_1715396181323"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_7_1715391764122",
+      "context": {
+        "dia_semana": "@dia_semana"
+      },
+      "conditions": "@dia_semana",
+      "event_name": "input",
+      "dialog_node": "handler_6_1715391764145"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_5_1715397097419",
+      "context": {
+        "tipos_pratos": "@tipos_pratos"
+      },
+      "conditions": "@tipos_pratos",
+      "event_name": "input",
+      "dialog_node": "handler_6_1715397097419"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": ""
+              }
+            ],
+            "response_type": "text"
+          }
+        ]
+      },
+      "parent": "slot_5_1715397097419",
+      "event_name": "focus",
+      "dialog_node": "handler_7_1715397097419",
+      "previous_sibling": "handler_6_1715397097419"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Para qual dia da semana?"
+              },
+              {
+                "text": "Qual dia da semana o senhor(a) deseja?"
+              },
+              {
+                "text": "Pode me passar o dia que o senhor quer por favor?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "random"
+          }
+        ]
+      },
+      "parent": "slot_7_1715391764122",
+      "event_name": "focus",
+      "dialog_node": "handler_9_1715391764145",
+      "previous_sibling": "handler_6_1715391764145"
+    },
+    {
+      "type": "frame",
+      "title": "Opção Carnes vermelhas",
+      "output": {},
+      "parent": "node_1_1715394093666",
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "@tipos_pratos:(Carnes Vermelhas)",
+      "dialog_node": "node_10_1715397100989",
+      "previous_sibling": "node_7_1715396138441"
+    },
+    {
+      "type": "standard",
+      "title": "Informação sobre o funcionamento",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "O horário de funcionamento é de Segunda a Sexta das 16:00 às 22:00. Sábado e Domingo das 18:00 às 00:00."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_7_1715393449180",
+      "conditions": "#horario_funcionamento",
+      "dialog_node": "node_1_1713490768029"
+    },
+    {
+      "type": "standard",
+      "title": "Sugestões",
+      "parent": "node_2_1715393763948",
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "#sugestao_prato",
+      "dialog_node": "node_1_1715394093666"
+    },
+    {
+      "type": "frame",
+      "title": "Opção Peixes",
+      "output": {},
+      "parent": "node_1_1715394093666",
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "@tipos_pratos:Peixes",
+      "dialog_node": "node_1_1715397097417",
+      "previous_sibling": "node_10_1715397100989"
+    },
+    {
+      "type": "folder",
+      "title": "Harmonização de Pratos",
+      "conditions": "#sugestao_prato",
+      "digress_in": "does_not_return",
+      "dialog_node": "node_2_1715393763948",
+      "previous_sibling": "node_7_1715393449180"
+    },
+    {
+      "type": "frame",
+      "title": "Valor da experiência",
+      "parent": "node_3_1715391779400",
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "#valor_experiencia",
+      "dialog_node": "node_3_1715391744175"
+    },
+    {
+      "type": "folder",
+      "title": "Valores da experiência",
+      "conditions": "#valor_experiencia",
+      "dialog_node": "node_3_1715391779400",
+      "previous_sibling": "Bem-vindo"
+    },
+    {
+      "type": "folder",
+      "title": "Horários de funcionamento",
+      "conditions": "#horario_funcionamento",
+      "dialog_node": "node_7_1715393449180",
+      "previous_sibling": "node_3_1715391779400"
+    },
+    {
+      "type": "frame",
+      "title": "Opção Vegana",
+      "parent": "node_1_1715394093666",
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "@tipos_pratos:Vegana",
+      "dialog_node": "node_7_1715396138441"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Para você que deseja algo com carnes vermelhas e um acompanhamento algo alcoólico. Sugiro nosso delicioso Churrasco de bife Ancho Uruguaio e Vinho Chileno Branco Chardonnay. "
+              },
+              {
+                "text": "Para você que deseja algo com carnes vermelhas e um acompanhamento algo alcoólico. Sugiro nosso delicioso Churrasco de bife Ancho Uruguaio e Vinho Sauvignon Blanc."
+              },
+              {
+                "text": "Para você que deseja algo com carnes vermelhas e um acompanhamento algo alcoólico. Sugiro nosso delicioso Churrasco de bife Ancho Uruguaio e Espumante Colombard."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "random"
+          }
+        ]
+      },
+      "parent": "node_1_1715394093666",
+      "conditions": "@tipo_bebida:Alcoólica && @tipos_pratos:(Carnes Vermelhas)",
+      "dialog_node": "response_1_1715395378698",
+      "previous_sibling": "response_4_1715395269073"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Para você que deseja tipo de prato $tipos_pratos com o acompanhamento do tipo $tipo_bebida. Sugiro nosso delicioso Churrasco de bife Ancho Uruguaio com suco de abacaxi."
+              },
+              {
+                "text": "Para você que deseja tipo de prato $tipos_pratos com o acompanhamento do tipo $tipo_bebida. Sugiro nosso delicioso Churrasco de bife Ancho Uruguaio com suco de uva verde."
+              },
+              {
+                "text": "Para você que deseja tipo de prato $tipos_pratos com o acompanhamento do tipo $tipo_bebida. Sugiro nosso delicioso Churrasco de bife Ancho Uruguaio com suco de Maracujá."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "random"
+          }
+        ]
+      },
+      "parent": "node_10_1715397100989",
+      "conditions": "@tipo_bebida:suco",
+      "dialog_node": "response_17_1715397100993",
+      "previous_sibling": "slot_14_1715397100993"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Para você que deseja um prato do tipo $tipos_pratos com o acompanhamento de algo $tipo_bebida. Sugiro nosso delicioso Churrasco de bife Ancho Uruguaio e Vinho Sauvignon Blanc."
+              },
+              {
+                "text": "Para você que deseja um prato do tipo $tipos_pratos com o acompanhamento de algo $tipo_bebida. Sugiro nosso delicioso Churrasco de bife Ancho Uruguaio e Vinho Chileno Branco Chardonnay."
+              },
+              {
+                "text": "Para você que deseja um prato do tipo $tipos_pratos com o acompanhamento de algo $tipo_bebida. Sugiro nosso delicioso Churrasco de bife Ancho Uruguaio e Espumante Colombard."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "random"
+          }
+        ]
+      },
+      "parent": "node_10_1715397100989",
+      "conditions": "@tipo_bebida:Alcoólica",
+      "dialog_node": "response_18_1715397100993",
+      "previous_sibling": "response_17_1715397100993"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "No Sábado, o valor é de R$ 60,00 por pessoa."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_3_1715391744175",
+      "conditions": "@dia_semana:Sábado",
+      "dialog_node": "response_2_1715393177841",
+      "previous_sibling": "response_7_1715391763278"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Para você que deseja um prato com peixes e de  acompanhamento um suco. Sugiro nosso delicioso Salmão Defumado e Suco de Maracujá."
+              },
+              {
+                "text": "Para você que deseja um prato com peixes e de  acompanhamento um suco. Sugiro nosso delicioso Salmão Defumado e Suco de abacaxi."
+              },
+              {
+                "text": "Para você que deseja um prato com peixes e de  acompanhamento um suco. Sugiro nosso delicioso Salmão Defumado e Suco de uva verde."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "random"
+          }
+        ]
+      },
+      "parent": "node_1_1715394093666",
+      "conditions": "@tipo_bebida:suco && @tipos_pratos:Peixes",
+      "dialog_node": "response_2_1715395568321",
+      "previous_sibling": "response_1_1715395378698"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Para você que deseja um prato com peixes e de  acompanhamento algo alcoólico. Sugiro nosso delicioso Salmão Defumado e Espumante Colombard."
+              },
+              {
+                "text": "Para você que deseja um prato com peixes e de  acompanhamento algo alcoólico. Sugiro nosso delicioso Salmão Defumado e Vinho Chileno Branco Chardonnay."
+              },
+              {
+                "text": "Para você que deseja um prato com peixes e de  acompanhamento algo alcoólico. Sugiro nosso delicioso Salmão Defumado e Vinho Sauvignon Blanc."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "random"
+          }
+        ]
+      },
+      "parent": "node_1_1715394093666",
+      "conditions": "@tipo_bebida:Alcoólica && @tipos_pratos:Peixes",
+      "dialog_node": "response_3_1715395927899",
+      "previous_sibling": "response_2_1715395568321"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Para você que deseja algo com carnes vermelhas e um acompanhamento de um suco. Sugiro nosso delicioso Churrasco de bife Ancho Uruguaio e Suco de Abacaxi."
+              },
+              {
+                "text": "Para você que deseja algo com carnes vermelhas e um acompanhamento de um suco. Sugiro nosso delicioso Churrasco de bife Ancho Uruguaio e Suco de uva verde."
+              },
+              {
+                "text": "Para você que deseja algo com carnes vermelhas e um acompanhamento de um suco. Sugiro nosso delicioso Churrasco de bife Ancho Uruguaio e Suco de Maracujá."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "random"
+          }
+        ]
+      },
+      "parent": "node_1_1715394093666",
+      "conditions": "@tipo_bebida:suco && @tipos_pratos:(Carnes Vermelhas)",
+      "dialog_node": "response_4_1715395269073",
+      "previous_sibling": "response_7_1715394540489"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Qual tipo de prato você prefere? Temos Carnes Vermelhas, Peixes e Vegana."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_1_1715394093666",
+      "dialog_node": "response_4_1715396084602",
+      "previous_sibling": "response_3_1715395927899"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Para você que deseja um prato do tipo $tipos_pratos com o acompanhamento de algo $tipo_bebida. Sugiro nosso delicioso Pene ao pesto e Vinho Sauvignon Blanc."
+              },
+              {
+                "text": "Para você que deseja um prato do tipo $tipos_pratos com o acompanhamento de algo $tipo_bebida. Sugiro nosso delicioso Pene ao pesto e Vinho Chileno Branco Chardonnay."
+              },
+              {
+                "text": "Para você que deseja um prato do tipo $tipos_pratos com o acompanhamento de algo $tipo_bebida. Sugiro nosso delicioso Pene ao pesto e Espumante Colombard."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "random"
+          }
+        ]
+      },
+      "parent": "node_7_1715396138441",
+      "conditions": "@tipo_bebida:Alcoólica",
+      "dialog_node": "response_4_1715396376789",
+      "previous_sibling": "response_9_1715396157000"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "O valor da experiência é de R$ 50,00 de Segunda à Sexta Feira."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_3_1715391744175",
+      "conditions": "@dia_semana != Domingo && @dia_semana != Sábado",
+      "dialog_node": "response_6_1715393202531",
+      "previous_sibling": "response_2_1715393177841"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "No Domingo, o valor é de R$ 70,00 por pessoa."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_3_1715391744175",
+      "conditions": "@dia_semana:Domingo",
+      "dialog_node": "response_7_1715391763278",
+      "previous_sibling": "slot_7_1715391764122"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Para você que deseja um prato do tipo vegano com o acompanhamento de algo alcoólico. Sugiro nosso delicioso Pene ao pesto e Vinho Sauvignon Blanc."
+              },
+              {
+                "text": "Para você que deseja um prato do tipo vegano com o acompanhamento de algo alcoólico. Sugiro nosso delicioso Pene ao pesto e Vinho Chileno Branco Chardonnay."
+              },
+              {
+                "text": "Para você que deseja um prato do tipo vegano com o acompanhamento de algo alcoólico. Sugiro nosso delicioso Pene ao pesto e Espumante Colombard."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "random"
+          }
+        ]
+      },
+      "parent": "node_1_1715394093666",
+      "conditions": "@tipo_bebida:Alcoólica && @tipos_pratos:Vegana",
+      "dialog_node": "response_7_1715394540489",
+      "previous_sibling": "response_8_1715394202175"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Para você que deseja tipo de prato vegano com o acompanhamento do tipo suco. Sugiro nosso delicioso Pene ao pesto com suco de uva verde."
+              },
+              {
+                "text": "Para você que deseja tipo de prato vegano com o acompanhamento do tipo suco. Sugiro nosso delicioso Pene ao pesto com suco de abacaxi."
+              },
+              {
+                "text": "Para você que deseja tipo de prato vegano com o acompanhamento do tipo suco. Sugiro nosso delicioso Pene ao pesto com suco de Maracujá."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "random"
+          }
+        ]
+      },
+      "parent": "node_1_1715394093666",
+      "conditions": "@tipo_bebida:suco && @tipos_pratos:Vegana",
+      "dialog_node": "response_8_1715394202175",
+      "previous_sibling": "node_1_1715397097417"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Para você que deseja tipo de prato $tipos_pratos com o acompanhamento do tipo $tipo_bebida. Sugiro nosso delicioso Salmão Defumado com suco de abacaxi."
+              },
+              {
+                "text": "Para você que deseja tipo de prato $tipos_pratos com o acompanhamento do tipo $tipo_bebida. Sugiro nosso delicioso Salmão Defumado com suco de uva verde."
+              },
+              {
+                "text": "Para você que deseja tipo de prato $tipos_pratos com o acompanhamento do tipo $tipo_bebida. Sugiro nosso delicioso Salmão Defumado com suco de Maracujá."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "random"
+          }
+        ]
+      },
+      "parent": "node_1_1715397097417",
+      "conditions": "@tipo_bebida:suco",
+      "dialog_node": "response_8_1715397097419",
+      "previous_sibling": "slot_5_1715397097419"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Para você que deseja tipo de prato $tipos_pratos com o acompanhamento do tipo $tipo_bebida. Sugiro nosso delicioso Pene ao pesto com suco de abacaxi."
+              },
+              {
+                "text": "Para você que deseja tipo de prato $tipos_pratos com o acompanhamento do tipo $tipo_bebida. Sugiro nosso delicioso Pene ao pesto com suco de uva verde."
+              },
+              {
+                "text": "Para você que deseja tipo de prato $tipos_pratos com o acompanhamento do tipo $tipo_bebida. Sugiro nosso delicioso Pene ao pesto com suco de Maracujá."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "random"
+          }
+        ]
+      },
+      "parent": "node_7_1715396138441",
+      "conditions": "@tipo_bebida:suco",
+      "dialog_node": "response_9_1715396157000",
+      "previous_sibling": "slot_8_1715396181322"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Para você que deseja um prato do tipo $tipos_pratos com o acompanhamento de algo $tipo_bebida. Sugiro nosso delicioso Salmão Defumado e Vinho Sauvignon Blanc."
+              },
+              {
+                "text": "Para você que deseja um prato do tipo $tipos_pratos com o acompanhamento de algo $tipo_bebida. Sugiro nosso delicioso Salmão Defumado e Vinho Chileno Branco Chardonnay."
+              },
+              {
+                "text": "Para você que deseja um prato do tipo $tipos_pratos com o acompanhamento de algo $tipo_bebida. Sugiro nosso delicioso Salmão Defumado e Espumante Colombard."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "random"
+          }
+        ]
+      },
+      "parent": "node_1_1715397097417",
+      "conditions": "@tipo_bebida:Alcoólica",
+      "dialog_node": "response_9_1715397097419",
+      "previous_sibling": "response_8_1715397097419"
+    },
+    {
+      "type": "slot",
+      "output": {},
+      "parent": "node_7_1715396138441",
+      "variable": "$tipo_bebida",
+      "dialog_node": "slot_10_1715396157838"
+    },
+    {
+      "type": "slot",
+      "output": {},
+      "parent": "node_10_1715397100989",
+      "variable": "$tipo_bebida",
+      "dialog_node": "slot_11_1715397100993"
+    },
+    {
+      "type": "slot",
+      "output": {},
+      "parent": "node_10_1715397100989",
+      "variable": "$tipos_pratos",
+      "dialog_node": "slot_14_1715397100993",
+      "previous_sibling": "slot_11_1715397100993"
+    },
+    {
+      "type": "slot",
+      "output": {},
+      "parent": "node_1_1715397097417",
+      "variable": "$tipo_bebida",
+      "dialog_node": "slot_2_1715397097419"
+    },
+    {
+      "type": "slot",
+      "output": {},
+      "parent": "node_1_1715397097417",
+      "variable": "$tipos_pratos",
+      "dialog_node": "slot_5_1715397097419",
+      "previous_sibling": "slot_2_1715397097419"
+    },
+    {
+      "type": "slot",
+      "output": {},
+      "parent": "node_3_1715391744175",
+      "variable": "$dia_semana",
+      "dialog_node": "slot_7_1715391764122"
+    },
+    {
+      "type": "slot",
+      "parent": "node_7_1715396138441",
+      "variable": "$tipos_pratos",
+      "dialog_node": "slot_8_1715396181322",
+      "previous_sibling": "slot_10_1715396157838"
+    }
+  ],
+  "counterexamples": [],
+  "system_settings": {
+    "generative_ai": {
+      "slot_filling": {
+        "enabled": false
+      }
+    },
+    "disambiguation": {
+      "prompt": "Você quis dizer:",
+      "enabled": true,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "Nenhuma das anteriores",
+      "use_connect_to_support_prompt": "Connect to support",
+      "single_answer_clarification_prompt": "Something else"
+    },
+    "human_agent_assist": {
+      "prompt": "Você quis dizer:"
+    }
+  },
+  "learning_opt_out": false,
+  "language": "pt-br",
+  "description": "Skill feita para fornecer informações para a startup DayScape.",
+  "name": "DayScapeBot-dialog"
+}
